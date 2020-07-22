@@ -34,6 +34,7 @@ local function metrics()
     ingress = ngx.var.ingress_name or "-",
     service = ngx.var.service_name or "-",
     path = ngx.var.location_path or "-",
+    uri = ngx.var.uri or "-",
 
     method = ngx.var.request_method or "-",
     status = ngx.var.status or "-",

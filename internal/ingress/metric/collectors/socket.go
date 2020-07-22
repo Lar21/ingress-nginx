@@ -54,6 +54,7 @@ type socketData struct {
 	Ingress   string `json:"ingress"`
 	Service   string `json:"service"`
 	Path      string `json:"path"`
+	Uri       string `json:"uri"`
 }
 
 // SocketCollector stores prometheus metrics and ingress meta-data
@@ -87,6 +88,7 @@ var (
 
 		"method",
 		"path",
+		"uri",
 
 		"namespace",
 		"ingress",
@@ -240,6 +242,7 @@ func (sc *SocketCollector) handleMessage(msg []byte) {
 			"status":    stats.Status,
 			"method":    stats.Method,
 			"path":      stats.Path,
+			"uri":       stats.Uri,
 			"namespace": stats.Namespace,
 			"ingress":   stats.Ingress,
 			"service":   stats.Service,
