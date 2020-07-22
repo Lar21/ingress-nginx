@@ -1,3 +1,39 @@
+## Por que um fork do nginx?
+Para ter as métricas de request no prometheus, nós precisamos da flag **uri** (o repo original não envia). 
+
+## Como faço para subir?
+clone esse repo
+
+```
+export TAG="0.34.3" # troque para uma tag maior, IMPORTANTE: tem q ser no formato de versão
+export REGISTRY="gcr.io/pontotel-265713/nginx-ingress"
+```
+Suba a imagem para o nosso registry:
+```
+docker pull gcr.io/pontotel-265713/nginx-ingress:0.34.3
+```
+
+Esse nome da imagem você deve atualizar no infra no arquivo: `cluster-configuration/setup-ingress.sh`:
+
+No helm vc vai colocar para usar essa imagem que buildamos:
+```
+helm upgrade nginx-ingress \
+    stable/nginx-ingress \
+    --values ./k8s-nginx-ingress/values.yaml \
+    --set controller.publishService.enabled=true \
+    --install \
+    --set controller.image.tag=0.34.3 \ <----- AQUI
+    --set controller.image.registry=gcr.io \ 
+    --set controller.image.repository=pontotel-265713/nginx-ingress/controller \  <----- AQUI
+    --set controller.service.loadBalancerIP=$FIX_IP \
+    --set controller.metrics.serviceMonitor.enabled=true \
+    --set controller.metrics.enabled=true
+```
+
+Rode o setup.ingress.sh e está feito.
+
+## ORIGINAL README
+
 ## Help us to improve the NGINX Ingress controller [completing the survey](https://docs.google.com/forms/d/15ULTOvYDsV920V0GWrspew4yyjEmTAi740Wr34UgKwA/viewform)
 
 ---
