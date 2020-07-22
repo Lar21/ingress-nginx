@@ -13,9 +13,8 @@ Suba a imagem para o nosso registry:
 docker pull gcr.io/pontotel-265713/nginx-ingress:0.34.3
 ```
 
-Esse nome da imagem você deve atualizar no infra no arquivo: `cluster-configuration/setup-ingress.sh`:
-
-No helm vc vai colocar para usar essa imagem que buildamos:
+Esse nome da imagem você deve colocar no arquivo `cluster-configuration/setup-ingress.sh` do repo infrastructure.
+Exemplo:
 ```
 helm upgrade nginx-ingress \
     stable/nginx-ingress \
