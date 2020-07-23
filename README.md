@@ -7,6 +7,7 @@ clone esse repo
 ```
 export TAG="0.34.3" # troque para uma tag maior, IMPORTANTE: tem q ser no formato de versão
 export REGISTRY="gcr.io/pontotel-265713/nginx-ingress"
+make build image
 ```
 Suba a imagem para o nosso registry:
 ```
